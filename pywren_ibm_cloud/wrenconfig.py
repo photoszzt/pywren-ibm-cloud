@@ -122,8 +122,8 @@ def default(config_data=None):
 
             config_data = load(config_filename)
 
-    if not set(('pywren', 'ibm_cf', 'ibm_cos')).issubset(set(config_data)):
-        raise Exception("pywren, ibm_cf and ibm_cos sections are mandatory in config")
+    # if not set(('pywren', 'ibm_cf', 'ibm_cos')).issubset(set(config_data)):
+    #     raise Exception("pywren, ibm_cf and ibm_cos sections are mandatory in config")
 
     if 'storage_backend' not in config_data['pywren']:
         config_data['pywren']['storage_backend'] = STORAGE_BACKEND_DEFAULT

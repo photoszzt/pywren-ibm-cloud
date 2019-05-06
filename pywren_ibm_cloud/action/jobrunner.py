@@ -33,6 +33,7 @@ from pywren_ibm_cloud.libs.tblib import pickling_support
 from pywren_ibm_cloud.utils import get_current_memory_usage
 from pywren_ibm_cloud.storage.backends.cos import COSBackend
 from pywren_ibm_cloud.storage.backends.swift import SwiftBackend
+from pywren_ibm_cloud.storage.backends.s3 import S3Backend
 
 pickling_support.install()
 level = logging.INFO
@@ -164,6 +165,8 @@ class jobrunner(Process):
                 mr_storage_client = COSBackend(self.storage_config['ibm_cos'])
             elif 'swift' in self.storage_config:
                 mr_storage_client = SwiftBackend(self.storage_config['swift'])
+            elif 's3' in self.storage_config:
+                mr_storage_client = S3Backend(self.storage_config['s3'])
 
             data['storage'] = mr_storage_client
 
@@ -174,6 +177,10 @@ class jobrunner(Process):
         if 'swift' in func_sig.parameters:
             swift_client = SwiftBackend(self.storage_config['swift'])
             data['swift'] = swift_client
+
+        if 's3' in func_sig.parameters:
+            s3_client = S3Backend(self.storage_config['s3'])
+            data['s3'] = s3_client
 
         if 'internal_storage' in func_sig.parameters:
             data['internal_storage'] = self.internal_storage

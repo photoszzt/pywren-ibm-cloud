@@ -19,6 +19,7 @@ import json
 from pywren_ibm_cloud.version import __version__
 from pywren_ibm_cloud.storage.backends.cos import COSBackend
 from pywren_ibm_cloud.storage.backends.swift import SwiftBackend
+from pywren_ibm_cloud.storage.backends.s3 import S3Backend
 from pywren_ibm_cloud.storage.exceptions import StorageNoSuchKeyError
 from pywren_ibm_cloud.storage.storage_utils import create_status_key, create_output_key, status_key_suffix
 
@@ -39,6 +40,8 @@ class InternalStorage:
             self.backend_handler = COSBackend(config['ibm_cos'])
         elif self.backend_type == 'swift':
             self.backend_handler = SwiftBackend(config['swift'])
+        elif self.backend_type == 's3':
+            self.backend_handler = S3Backend(config['s3']) 
         else:
             raise NotImplementedError(("Using {} as internal storage backend is" +
                                        "not supported yet").format(self.backend_type))
