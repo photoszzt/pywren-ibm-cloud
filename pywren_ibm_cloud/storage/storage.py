@@ -19,6 +19,7 @@ import json
 from ..version import __version__
 from .backends.cos import COSBackend
 from .backends.swift import SwiftBackend
+from .backends.s3 import S3Backend
 from .exceptions import StorageNoSuchKeyError
 from .storage_utils import create_status_key, create_output_key, status_key_suffix
 
@@ -39,6 +40,8 @@ class InternalStorage:
             self.backend_handler = COSBackend(config['ibm_cos'], config['ibm_iam'])
         elif self.backend_type == 'swift':
             self.backend_handler = SwiftBackend(config['swift'])
+        elif self.backend_type == 's3':
+            self.backend_handler = S3Backend(config['s3'])
         else:
             raise NotImplementedError(("Using {} as internal storage backend is" +
                                        "not supported yet").format(self.backend_type))

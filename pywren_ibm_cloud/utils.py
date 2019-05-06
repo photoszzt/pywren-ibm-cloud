@@ -253,7 +253,7 @@ class WrappedStreamingBody:
 
 def verify_args(func, data, object_processing=False):
     # Verify parameters
-    none_verify_parameters = ['storage', 'ibm_cos', 'swift', 'internal_storage']
+    none_verify_parameters = ['storage', 'ibm_cos', 'swift', 'internal_storage', 's3']
     func_sig = inspect.signature(func)
 
     # Check mandatory parameters in function

@@ -98,7 +98,7 @@ def get_storage_path(storage_config):
     storage_prefix = storage_config['storage_prefix']
     storage_backend = storage_config['storage_backend']
 
-    if storage_backend != 'ibm_cos' and storage_backend != 'swift':
+    if storage_backend != 'ibm_cos' and storage_backend != 'swift' and storage_backend != 's3':
         raise NotImplementedError(
             ("Using {} as storage backend is not supported yet").format(
              storage_backend))
